@@ -55,7 +55,9 @@ def train():
 
             loss_gen_source= criterion(predict_fake_source, torch.ones_like(predict_fake_source))
             # l1 losse
-            l1_loss=l1(source,source_fake)+l1(target,target_fake)
+            gen_source_fake=gen_source(target_fake)
+            gen_target_fake = gen_target(source_fake)
+            l1_loss=l1(source,gen_source_fake)+l1(target,target_fake)
 
             total_gen_loss=loss_gen_target+loss_gen_source+Config.lambda_*l1_loss
 
