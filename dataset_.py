@@ -22,7 +22,7 @@ class translation_dataset(Dataset):
         target=self.list_target[item%self.target_len]
         source_img=Image.open(os.path.join(self.root_s,source)).convert('RGB')
         target_img = Image.open(os.path.join(self.root_t, target)).convert('RGB')
-        transfrom=transforms.Compose([transforms.Resize((256,256)),transforms.ToTensor()])
+        transfrom=transforms.Compose([transforms.Resize((256,256)),transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]), transforms.ToTensor()])
         source_img=transfrom(source_img)
         target_img=transfrom(target_img)
         return source_img, target_img
