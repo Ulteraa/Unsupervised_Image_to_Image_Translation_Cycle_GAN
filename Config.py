@@ -2,14 +2,14 @@ import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from torchvision import transforms
 import torch
-lr_=0.0002
+lr_=1e-5
 batch_size=1
 root_s='maps/trainA'
 root_t='maps/trainB'
 root_v_s='maps/valA'
 root_v_t='maps/valB'
 
-lambda_=100
+lambda_=10
 epochs=500
 image_chanel=3
 image_size=600
