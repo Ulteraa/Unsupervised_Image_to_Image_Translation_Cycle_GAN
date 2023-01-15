@@ -58,8 +58,17 @@ def train():
             gen_source_fake=gen_source(target_fake)
             gen_target_fake = gen_target(source_fake)
             l1_loss=l1(source,gen_source_fake)+l1(target,target_fake)
+            
+            # identity_loss
+            identity_source = gen_source(source)
+            identity_target = gen_target(target)
+            identity_source_loss = l1(source, identity_source)
+            identity_target_loss = l1(target, identity_target)
+            identity_loss = identity_source_loss+identity_target_loss
 
-            total_gen_loss=loss_gen_target+loss_gen_source+Config.lambda_*l1_loss
+            total_gen_loss=loss_gen_target+loss_gen_source+Config.lambda_*l1_loss+identity_loss
+
+           
 
             optim_gen.zero_grad()
             total_gen_loss.backward()
